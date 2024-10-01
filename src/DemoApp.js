@@ -4,6 +4,8 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { INITIAL_EVENTS, createEventId } from "./event-utils";
+import DatePickerComponent from "./components/date-picker";
+import DropdownComponent from "./components/dropdown";
 
 export default function DemoApp() {
   const calendarRef = useRef(null);
@@ -35,26 +37,17 @@ export default function DemoApp() {
     }
   }
 
-  const handleViewChange = (event) => {
-    const selectedView = event.target.value;
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.changeView(selectedView);
-  };
-
   return (
     <div className="demo-app">
-      <div className="header">
-        <select onChange={handleViewChange}>
-          <option value="timeGridDay">Day</option>
-          <option value="timeGridWeek">Week</option>
-          <option value="dayGridMonth">Month</option>
-        </select>
+      <div className="header-calendar">
+        <DropdownComponent calendarRef={calendarRef} />
+        <DatePickerComponent calendarRef={calendarRef} />
       </div>
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={false}
-        initialView={"dayGridMonth"}
+        initialView={"timeGridDay"}
         editable={true}
         selectable={true}
         selectMirror={true}
