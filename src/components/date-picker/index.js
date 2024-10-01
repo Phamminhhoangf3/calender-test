@@ -11,7 +11,7 @@ const formatDate = (value) => {
   const month = String(date.getMonth() + 1).padStart(2, "0"); // Tháng bắt đầu từ 0
   const day = String(date.getDate()).padStart(2, "0");
 
-  return `${year}/${month}/${day}`;
+  return `${year}-${month}-${day}`;
 };
 
 export default function DatePickerComponent({ calendarRef }) {
@@ -21,12 +21,7 @@ export default function DatePickerComponent({ calendarRef }) {
   function handleChange(values) {
     setDateRange(values);
     const calendarApi = calendarRef.current.getApi();
-    if (values.every((value) => !!value)) {
-      calendarApi.changeView("timeGrid", {
-        start: formatDate(values[0]),
-        end: formatDate(values[1]),
-      });
-    }
+    calendarApi.gotoDate(formatDate(values[0]));
   }
 
   return (
