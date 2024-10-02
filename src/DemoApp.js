@@ -3,9 +3,9 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import MenuRight, { optionDropdown } from "./components/menu-right";
 import { createEventId, INITIAL_EVENTS } from "./utils";
-import MenuLeft from "./components/menu-left";
+import MenuLeft, { optionDropdown } from "./components/menu-left";
+import MenuRight from "./components/menu-right";
 
 export default function DemoApp() {
   const calendarRef = useRef(null);
@@ -41,12 +41,12 @@ export default function DemoApp() {
   return (
     <div className="demo-app">
       <div className="header-calendar">
-        <MenuRight
+        <MenuLeft
           calendarRef={calendarRef}
           value={valueDropdown}
           setValue={setValueDropdown}
         />
-        <MenuLeft calendarRef={calendarRef} mode={valueDropdown} />
+        <MenuRight calendarRef={calendarRef} mode={valueDropdown} />
       </div>
       <FullCalendar
         ref={calendarRef}

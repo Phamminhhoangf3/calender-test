@@ -1,22 +1,16 @@
-export const optionDropdown = {
-  day: "timeGridDay",
-  week: "timeGridWeek",
-  month: "dayGridMonth",
-};
+import DatePickerDay from "../datepicker/datepickerDay.js";
+import DatePickerWeek from "../datepicker/datepickerWeek.js";
+import DatePickerMonth from "../datepicker/datepickerMonth.js";
 
-export default function MenuRight({ calendarRef, setValue, value }) {
-  function handleChange(event) {
-    const selectedView = event.target.value;
-    setValue(selectedView);
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.changeView(selectedView);
-  }
+import "react-datepicker/dist/react-datepicker.css";
+import "../datepicker/DatePickerCustom.css";
 
-  return (
-    <select onChange={handleChange} value={value}>
-      <option value={optionDropdown.day}>Day</option>
-      <option value={optionDropdown.week}>Week</option>
-      <option value={optionDropdown.month}>Month</option>
-    </select>
-  );
+export default function MenuRight({ calendarRef, mode }) {
+  const listDatepicker = {
+    timeGridDay: <DatePickerDay calendarRef={calendarRef} />,
+    timeGridWeek: <DatePickerWeek calendarRef={calendarRef} />,
+    dayGridMonth: <DatePickerMonth calendarRef={calendarRef} />,
+  };
+
+  return <div>{listDatepicker?.[mode]}</div>;
 }
