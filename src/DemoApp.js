@@ -3,32 +3,18 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { createEventId, INITIAL_EVENTS } from "./utils";
+import { INITIAL_EVENTS } from "./utils";
 import MenuLeft, { optionDropdown } from "./components/menu-left";
 import MenuRight from "./components/menu-right";
+import TooltipJob from "./components/tooltip/job";
 
 import "./demoApp.css";
 
 export default function DemoApp() {
   const calendarRef = useRef(null);
   const [valueDropdown, setValueDropdown] = useState(optionDropdown.day);
-
-  function handleDateSelect(selectInfo) {
-    let title = prompt("Please enter a new title for your event");
-    let calendarApi = selectInfo.view.calendar;
-
-    calendarApi.unselect(); // clear date selection
-
-    if (title) {
-      calendarApi.addEvent({
-        id: createEventId(),
-        title,
-        start: selectInfo.startStr,
-        end: selectInfo.endStr,
-        allDay: selectInfo.allDay,
-      });
-    }
-  }
+  const [tooltipVisible, setTooltipVisible] = useState(false);
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
 
   function handleEventClick(clickInfo) {
     if (
@@ -38,6 +24,16 @@ export default function DemoApp() {
     ) {
       clickInfo.event.remove();
     }
+  }
+
+  function handleDateSelect(info) {
+    const targetRect = info.jsEvent.target.getBoundingClientRect();
+
+    setTooltipPosition({
+      x: targetRect.left - 82 + targetRect.width / 2,
+      y: targetRect.top - 130,
+    });
+    setTooltipVisible(true);
   }
 
   return (
@@ -61,18 +57,11 @@ export default function DemoApp() {
         dayMaxEvents={true}
         initialEvents={INITIAL_EVENTS}
         select={handleDateSelect}
-        eventContent={renderEventContent}
+        unselect={() => setTooltipVisible(false)}
+        eventContent={() => <></>}
         eventClick={handleEventClick}
       />
+      <TooltipJob positionParent={tooltipPosition} visible={tooltipVisible} />
     </div>
-  );
-}
-
-function renderEventContent(eventInfo) {
-  return (
-    <>
-      <b>{eventInfo.timeText}</b>
-      <i>{eventInfo.event.title}</i>
-    </>
   );
 }

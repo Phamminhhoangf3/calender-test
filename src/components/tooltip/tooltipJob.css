@@ -1,0 +1,33 @@
+.wrap-addjob-menu {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 9;
+  height: 120px;
+  width: 160px;
+  padding: 2px;
+}
+
+.wrap-addjob-menu .wrap-addjob-menu__items img {
+  margin-right: 6px;
+}
+
+.wrap-addjob-menu .wrap-addjob-menu__items span {
+  width: calc(100% - 30px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+.wrap-addjob-menu__items:hover {
+  background-color: #fff3d1;
+  border-radius: 4px;
+  cursor: pointer; 
+}
+
+.wrap-addjob-menu .wrap-addjob-menu__items {
+  padding: 8px;
+  display: flex;
+}
