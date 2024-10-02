@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useContext } from "react";
 import DatePicker from "react-datepicker";
 import { formatDate } from "../../utils";
+import { DateContext } from "../../DateContext";
 
 export default function DatePickerDay({ calendarRef }) {
-  const [startDate, setStartDate] = useState(new Date());
+  const { currentDate, updateDate } = useContext(DateContext);
 
   function handleChange(value) {
-    setStartDate(value);
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.gotoDate(formatDate(value));
+    updateDate(value);
+    const calendarApi = calendarRef.current?.getApi();
+    calendarApi?.gotoDate(formatDate(value));
   }
 
-  return <DatePicker selected={startDate} onChange={handleChange} />;
+  return <DatePicker selected={currentDate} onChange={handleChange} />;
 }

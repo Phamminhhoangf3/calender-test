@@ -1,19 +1,20 @@
-import { useState } from "react";
+import { useContext } from "react";
 import DatePicker from "react-datepicker";
 import { formatDate } from "../../utils";
+import { DateContext } from "../../DateContext";
 
 export default function DatePickerWeek({ calendarRef }) {
-  const [startDate, setStartDate] = useState(new Date());
+  const { currentDate, updateDate } = useContext(DateContext);
 
   function handleChange(value) {
-    setStartDate(value);
+    updateDate(value);
     const calendarApi = calendarRef.current.getApi();
     calendarApi.gotoDate(formatDate(value));
   }
   
   return (
     <DatePicker
-      selected={startDate}
+      selected={currentDate}
       onChange={handleChange}
       dateFormat="I/R"
       locale="en-GB"

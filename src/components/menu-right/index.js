@@ -4,6 +4,7 @@ import DatePickerMonth from "../datepicker/datepickerMonth.js";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "../datepicker/DatePickerCustom.css";
+import ButtonToday from "../button-today/index.js";
 
 export default function MenuRight({ calendarRef, mode }) {
   const listDatepicker = {
@@ -12,5 +13,10 @@ export default function MenuRight({ calendarRef, mode }) {
     dayGridMonth: <DatePickerMonth calendarRef={calendarRef} />,
   };
 
-  return <div>{listDatepicker?.[mode]}</div>;
+  return (
+    <div>
+      <ButtonToday calendarRef={calendarRef} />
+      {listDatepicker?.[mode]}
+    </div>
+  );
 }
