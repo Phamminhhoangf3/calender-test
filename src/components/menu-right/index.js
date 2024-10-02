@@ -4,7 +4,7 @@ export const optionDropdown = {
   month: "dayGridMonth",
 };
 
-export default function DropdownComponent({ calendarRef, setValue, value }) {
+export default function MenuRight({ calendarRef, setValue, value }) {
   function handleChange(event) {
     const selectedView = event.target.value;
     setValue(selectedView);
