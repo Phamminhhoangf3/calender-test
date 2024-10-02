@@ -7,6 +7,8 @@ import { createEventId, INITIAL_EVENTS } from "./utils";
 import MenuLeft, { optionDropdown } from "./components/menu-left";
 import MenuRight from "./components/menu-right";
 
+import "./demoApp.css";
+
 export default function DemoApp() {
   const calendarRef = useRef(null);
   const [valueDropdown, setValueDropdown] = useState(optionDropdown.day);

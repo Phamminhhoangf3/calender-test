@@ -6,15 +6,3 @@ body > div {
   padding: 0;
   height: 100%;
 }
-
-.demo-app {
-  width: 1200px;
-  margin: 0 auto;
-}
-
-.header-calendar {
-  width: 100%;
-  margin: 16px 0px;
-  display: flex;
-  justify-content: space-between;
-}

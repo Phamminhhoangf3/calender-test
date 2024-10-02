@@ -3,6 +3,9 @@ import DatePicker from "react-datepicker";
 import { formatDate } from "../../utils";
 import { DateContext } from "../../DateContext";
 
+import "react-datepicker/dist/react-datepicker.css";
+import "./DatePickerCustom.css";
+
 export default function DatePickerDay({ calendarRef }) {
   const { currentDate, updateDate } = useContext(DateContext);
 

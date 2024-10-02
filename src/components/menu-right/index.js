@@ -7,9 +7,6 @@ import ButtonPrev from "../button/prev.js";
 import DropdownNext from "../dropdown/dropdownNext.js";
 import DropdownPrev from "../dropdown/dropdownPrev.js";
 
-import "react-datepicker/dist/react-datepicker.css";
-import "../datepicker/DatePickerCustom.css";
-
 export default function MenuRight({ calendarRef, mode }) {
   const listDatepicker = {
     timeGridDay: <DatePickerDay calendarRef={calendarRef} />,
