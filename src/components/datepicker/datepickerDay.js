@@ -1,21 +1,14 @@
-import { forwardRef, useContext } from "react";
+import { useContext } from "react";
 import DatePicker from "react-datepicker";
 import { formatDate } from "../../utils";
 import { DateContext } from "../../DateContext";
+import CustomInputToButton from "./customInputToButton";
 
 import "react-datepicker/dist/react-datepicker.css";
 import './datePickerCustom.css'
 
 export default function DatePickerDay({ calendarRef }) {
   const { currentDate, updateDate } = useContext(DateContext);
-
-  const ExampleCustomInput = forwardRef(
-    ({ value, onClick, className }, ref) => (
-      <button className={className} onClick={onClick} ref={ref}>
-        {value}
-      </button>
-    )
-  );
 
   function handleChange(value) {
     if (!value) return;
@@ -28,7 +21,7 @@ export default function DatePickerDay({ calendarRef }) {
     <DatePicker
       selected={currentDate}
       onChange={handleChange}
-      customInput={<ExampleCustomInput className="example-custom-input" />}
+      customInput={<CustomInputToButton />}
     />
   );
 }
