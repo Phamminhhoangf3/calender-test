@@ -5,7 +5,7 @@ import { DateContext } from "../../DateContext";
 import CustomInputToButton from "./customInputToButton";
 
 import "react-datepicker/dist/react-datepicker.css";
-import "./DatePickerCustom.css";
+import './datePickerCustom.css'
 
 export default function DatePickerWeek({ calendarRef }) {
   const { currentDate, updateDate } = useContext(DateContext);
