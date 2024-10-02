@@ -1,38 +1,16 @@
-import { useState } from "react";
-import DatePicker from "react-datepicker";
+import DatePickerDay from "./datepickerDay.js";
+import DatePickerWeek from "./datepickerWeek.js";
+import DatePickerMonth from "./datepickerMonth.js";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "./DatePickerCustom.css";
 
-const formatDate = (value) => {
-  if (!value) return "";
-  const date = new Date(value);
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0"); // Tháng bắt đầu từ 0
-  const day = String(date.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
-};
-
-export default function DatePickerComponent({ calendarRef }) {
-  const [dateRange, setDateRange] = useState([null, null]);
-  const [startDate, endDate] = dateRange;
-
-  function handleChange(values) {
-    setDateRange(values);
-    const calendarApi = calendarRef.current.getApi();
-    calendarApi.gotoDate(formatDate(values[0]));
-  }
-
-  return (
-    <div>
-      <DatePicker
-        selectsRange={true}
-        startDate={startDate}
-        endDate={endDate}
-        onChange={handleChange}
-        isClearable={true}
-      />
-    </div>
-  );
+export default function DatePickerComponent({ calendarRef, mode }) {
+  const listDatepicker = {
+    timeGridDay: <DatePickerDay calendarRef={calendarRef} />,
+    timeGridWeek: <DatePickerWeek calendarRef={calendarRef} />,
+    dayGridMonth: <DatePickerMonth calendarRef={calendarRef} />,
+  };
+  
+  return <div>{listDatepicker?.[mode]}</div>;
 }

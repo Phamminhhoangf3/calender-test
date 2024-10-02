@@ -1,8 +1,10 @@
-import { useState } from "react";
+export const optionDropdown = {
+  day: "timeGridDay",
+  week: "timeGridWeek",
+  month: "dayGridMonth",
+};
 
-export default function DropdownComponent({ calendarRef }) {
-  const [value, setValue] = useState("timeGridDay");
-
+export default function DropdownComponent({ calendarRef, setValue, value }) {
   function handleChange(event) {
     const selectedView = event.target.value;
     setValue(selectedView);
@@ -12,9 +14,9 @@ export default function DropdownComponent({ calendarRef }) {
 
   return (
     <select onChange={handleChange} value={value}>
-      <option value="timeGridDay">Day</option>
-      <option value="timeGridWeek">Week</option>
-      <option value="dayGridMonth">Month</option>
+      <option value={optionDropdown.day}>Day</option>
+      <option value={optionDropdown.week}>Week</option>
+      <option value={optionDropdown.month}>Month</option>
     </select>
   );
 }

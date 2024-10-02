@@ -1,14 +1,16 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
-import { INITIAL_EVENTS, createEventId } from "./event-utils";
 import DatePickerComponent from "./components/date-picker";
 import DropdownComponent from "./components/dropdown";
+import { optionDropdown } from "./components/dropdown";
+import { createEventId, INITIAL_EVENTS } from "./utils";
 
 export default function DemoApp() {
   const calendarRef = useRef(null);
+  const [valueDropdown, setValueDropdown] = useState(optionDropdown.day);
 
   function handleDateSelect(selectInfo) {
     let title = prompt("Please enter a new title for your event");
@@ -40,14 +42,18 @@ export default function DemoApp() {
   return (
     <div className="demo-app">
       <div className="header-calendar">
-        <DropdownComponent calendarRef={calendarRef} />
-        <DatePickerComponent calendarRef={calendarRef} />
+        <DropdownComponent
+          calendarRef={calendarRef}
+          value={valueDropdown}
+          setValue={setValueDropdown}
+        />
+        <DatePickerComponent calendarRef={calendarRef} mode={valueDropdown} />
       </div>
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={false}
-        initialView={"timeGridDay"}
+        initialView={optionDropdown.day}
         editable={true}
         selectable={true}
         selectMirror={true}
