@@ -1,44 +1,46 @@
-import React, { useState } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import TooltipJob from "../tooltip/job";
-import { optionDropdown } from "../menu-left";
+import { dateEnum } from "../../enum";
 
-const halfWidthTooltip = 82;
-const halfHeightTooltip = 130;
-
-export default function Calendar({ calendarRef }) {
-  const [tooltipVisible, setTooltipVisible] = useState(false);
-  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 });
-
-  function handleDateSelect(info) {
-    const targetRect = info.jsEvent.target.getBoundingClientRect();
-
-    setTooltipPosition({
-      x: targetRect.left - halfWidthTooltip + targetRect.width / 2,
-      y: targetRect.top - halfHeightTooltip,
-    });
-    setTooltipVisible(true);
-  }
-
+export default function Calendar({
+  calendarRef,
+  handleSelect,
+  handleUnselect,
+  handleEventReceive,
+  tooltipPosition,
+  tooltipVisible,
+}) {
   return (
     <>
       <FullCalendar
         ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={false}
-        initialView={optionDropdown.day}
+        initialView={dateEnum.day}
         editable={true}
         selectable={true}
         selectMirror={true}
         dayMaxEvents={true}
-        select={handleDateSelect}
-        unselect={() => setTooltipVisible(false)}
-        eventContent={() => <></>}
+        droppable={true}
+        select={handleSelect}
+        unselect={handleUnselect}
+        eventContent={renderEventContent}
+        eventReceive={handleEventReceive}
+        height="calc(100vh - 54px)"
       />
       <TooltipJob positionParent={tooltipPosition} visible={tooltipVisible} />
+    </>
+  );
+}
+
+function renderEventContent(eventInfo) {
+  return (
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
     </>
   );
 }

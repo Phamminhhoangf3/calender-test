@@ -1,16 +1,17 @@
-.demo-app {
+.demoApp {
   width: 1200px;
   margin: 0 auto;
 }
 
-.header-calendar {
+.headerDemoApp {
   width: 100%;
   margin: 16px 0px;
   display: flex;
   justify-content: space-between;
 }
 
-.menu-right {
+.bodyDemoApp {
   display: flex;
-  justify-content: space-between;
+  gap: 8px;
+  height: calc(100vh - 54px);
 }

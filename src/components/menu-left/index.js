@@ -1,11 +1,23 @@
-export const optionDropdown = {
-  day: "timeGridDay",
-  week: "timeGridWeek",
-  month: "dayGridMonth",
-};
+import { dateEnum } from "../../enum";
+import DropdownComponent from "../dropdown";
+
+const optionDropdown = [
+  {
+    label: "day",
+    value: dateEnum.day,
+  },
+  {
+    label: "week",
+    value: dateEnum.week,
+  },
+  {
+    label: "month",
+    value: dateEnum.month,
+  },
+];
 
 export default function MenuLeft({ calendarRef, setValue, value }) {
-  function handleChange(event) {
+  function handleChangeDropdown(event) {
     const selectedView = event.target.value;
     setValue(selectedView);
     const calendarApi = calendarRef.current.getApi();
@@ -13,10 +25,10 @@ export default function MenuLeft({ calendarRef, setValue, value }) {
   }
 
   return (
-    <select onChange={handleChange} value={value}>
-      <option value={optionDropdown.day}>Day</option>
-      <option value={optionDropdown.week}>Week</option>
-      <option value={optionDropdown.month}>Month</option>
-    </select>
+    <DropdownComponent
+      handleChange={handleChangeDropdown}
+      options={optionDropdown}
+      value={value}
+    />
   );
 }

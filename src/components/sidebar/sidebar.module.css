@@ -1,0 +1,13 @@
+.externalEvent {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.externalEventItem {
+  height: 60px;
+  padding: 12px;
+  color: white;
+  cursor: pointer;
+}

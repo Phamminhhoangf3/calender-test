@@ -1,0 +1,14 @@
+.sidebar {
+  flex: none;
+  width: 200px;
+  border: solid 1px #ccc;
+  padding: 10px;
+  height: auto;
+  overflow-y: auto;
+}
+
+.container {
+  flex: 1 1 0%;
+}
+
+

@@ -3,6 +3,10 @@ body,
 body > div {
   margin: 0;
   padding: 0;
-  height: 100%;
   font-family: "Inter", sans-serif;
+}
+
+/*react datepicker */
+.react-datepicker-popper {
+  z-index: 9;
 }

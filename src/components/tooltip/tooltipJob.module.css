@@ -1,0 +1,33 @@
+.menu {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 9;
+  height: 120px;
+  width: 160px;
+  padding: 2px;
+}
+
+.menuItem {
+  padding: 8px;
+  display: flex;
+}
+
+.menuItem:hover {
+  background-color: #fff3d1;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.menuItem img {
+  margin-right: 6px;
+}
+
+.menuItem span {
+  width: calc(100% - 30px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 12px;
+  line-height: 24px;
+}
