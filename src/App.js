@@ -1,12 +1,7 @@
 import DemoApp from "./DemoApp";
-import { DateProvider } from "./DateContext";
 
 function App() {
-  return (
-    <DateProvider>
-      <DemoApp />
-    </DateProvider>
-  );
+  return <DemoApp />;
 }
 
 export default App;

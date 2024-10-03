@@ -8,4 +8,7 @@ export const formatDate = (value) => {
 export const generateRandomColor = () =>
   "#" + Math.floor(Math.random() * 16777215).toString(16);
 
-export const getLastCharacter = (str, n) => str.substring(str.length - n);
+export const getLastCharacter = (str, n) => {
+  if (!str) return "";
+  return str.substring(str.length - n);
+};

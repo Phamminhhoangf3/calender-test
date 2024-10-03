@@ -12,7 +12,7 @@ export default function Calendar({
   handleEventReceive,
   tooltipPosition,
   tooltipVisible,
-}) {
+}) {  
   return (
     <>
       <FullCalendar

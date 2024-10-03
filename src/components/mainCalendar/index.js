@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { memo, useCallback, useRef, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import SideBar from "../sidebar";
 import { generateRandomColor, getLastCharacter } from "../../utils";
@@ -9,7 +9,7 @@ import styles from "./mainCalendar.module.css";
 const halfWidthTooltip = 82;
 const halfHeightTooltip = 130;
 
-export default function MainCalendar({ calendarRef }) {
+const MainCalendar = ({ calendarRef }) => {
   const externalEventsRef = useRef(null);
   const idFisrtEvent = uuidv4();
   const [externalEventsState, setExternalEventsState] = useState([
@@ -31,7 +31,7 @@ export default function MainCalendar({ calendarRef }) {
     });
     setTooltipVisible(true);
   }
-    
+
   function handleUnselectDate() {
     setTooltipVisible(false);
   }
@@ -44,8 +44,7 @@ export default function MainCalendar({ calendarRef }) {
     setExternalEventsState(externalEventsNew);
   }
 
-
-  function handleAddEvent() {
+  const handleAddEvent = useCallback(() => {
     const idExternalEventNew = uuidv4();
     const externalEventNew = {
       id: idExternalEventNew,
@@ -53,7 +52,7 @@ export default function MainCalendar({ calendarRef }) {
       color: generateRandomColor(),
     };
     setExternalEventsState((prev) => [...prev, externalEventNew]);
-  }
+  }, []);
 
   return (
     <>
@@ -76,4 +75,6 @@ export default function MainCalendar({ calendarRef }) {
       </div>
     </>
   );
-}
+};
+
+export default memo(MainCalendar);

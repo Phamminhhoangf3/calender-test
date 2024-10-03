@@ -1,10 +1,10 @@
 import React, { useRef, useState } from "react";
-import MenuLeft from "./components/menu-left";
-import MenuRight from "./components/menu-right";
 import MainCalendar from "./components/mainCalendar";
-import { dateEnum } from "./enum";
 
 import styles from "./demoApp.module.css";
+import { dateEnum } from "./enum";
+import MenuLeft from "./components/menu-left";
+import MenuRight from "./components/menu-right";
 
 export default function DemoApp() {
   const calendarRef = useRef(null);

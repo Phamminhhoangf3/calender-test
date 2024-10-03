@@ -1,4 +1,4 @@
-import { forwardRef, useContext } from "react";
+import { forwardRef, useState } from "react";
 import {
   subWeeks,
   subMonths,
@@ -6,11 +6,8 @@ import {
   addWeeks,
   addMonths,
   addYears,
-  subDays,
-  addDays,
 } from "date-fns";
 import { formatDate } from "../../utils";
-import { DateContext } from "../../DateContext";
 import { dateEnum, longDateEnum } from "../../enum/index.js";
 import DropdownComponent from "../dropdown/index.js";
 
@@ -43,30 +40,19 @@ const dropdownNext = {
   [longDateEnum.year1]: (value) => addYears(value, 1),
 };
 
-const buttonPrev = {
-  [dateEnum.day]: (value) => subDays(value, 1),
-  [dateEnum.week]: (value) => subWeeks(value, 1),
-  [dateEnum.month]: (value) => subMonths(value, 1),
-};
-
-const buttonNext = {
-  [dateEnum.day]: (value) => addDays(value, 1),
-  [dateEnum.week]: (value) => addWeeks(value, 1),
-  [dateEnum.month]: (value) => addMonths(value, 1),
-};
-
 export default function MenuRight({ calendarRef, mode }) {
-  const { currentDate, updateDate } = useContext(DateContext);
+  const [rerender, setReRender] = useState(false);
+  const currentDate = calendarRef.current?.getApi()?.getDate() || new Date();
 
   function handleClickToday() {
-    updateDate(new Date());
+    setReRender(!rerender);
     const calendarApi = calendarRef.current.getApi();
     calendarApi.today();
   }
 
   function handleChangeDatepicker(value) {
     if (!value) return;
-    updateDate(value);
+    setReRender(!rerender);
 
     const calendarApi = calendarRef.current.getApi();
     calendarApi.gotoDate(formatDate(value));
@@ -75,7 +61,7 @@ export default function MenuRight({ calendarRef, mode }) {
   function handleChangeDropdownPrev(e) {
     const key = e.target.value;
     const prevDate = dropdownPrev?.[key](currentDate);
-    updateDate(prevDate);
+    setReRender(!rerender);
 
     const calendarApi = calendarRef.current.getApi();
     calendarApi.gotoDate(prevDate);
@@ -84,7 +70,7 @@ export default function MenuRight({ calendarRef, mode }) {
   function handleChangeDropdownNext(e) {
     const key = e.target.value;
     const nextDate = dropdownNext?.[key](currentDate);
-    updateDate(nextDate);
+    setReRender(!rerender);
 
     const calendarApi = calendarRef.current.getApi();
     calendarApi.gotoDate(nextDate);
@@ -104,16 +90,14 @@ export default function MenuRight({ calendarRef, mode }) {
   }
 
   function handleClickPrev() {
-    const prevDate = buttonPrev?.[mode](currentDate);
-    updateDate(prevDate);
+    setReRender(!rerender);
 
     const calendarApi = calendarRef.current.getApi();
     calendarApi.prev();
   }
 
   function handleClickNext() {
-    const prevDate = buttonNext?.[mode](currentDate);
-    updateDate(prevDate);
+    setReRender(!rerender);
 
     const calendarApi = calendarRef.current.getApi();
     calendarApi.next();

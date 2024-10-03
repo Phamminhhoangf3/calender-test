@@ -1,12 +1,8 @@
-import { useEffect } from "react";
+import { memo, useEffect } from "react";
 import styles from "./sidebar.module.css";
 import { Draggable } from "@fullcalendar/interaction/index.js";
 
-export default function SideBar({
-  handleAddEvent,
-  externalEvents,
-  externalEventsRef,
-}) {
+const SideBar = ({ handleAddEvent, externalEvents, externalEventsRef }) => {
   useEffect(() => {
     let draggable = new Draggable(externalEventsRef.current, {
       itemSelector: "#fc-event",
@@ -48,4 +44,6 @@ export default function SideBar({
       </div>
     </>
   );
-}
+};
+
+export default memo(SideBar);
