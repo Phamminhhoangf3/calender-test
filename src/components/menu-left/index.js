@@ -20,7 +20,7 @@ const stylesDropdown = {
   control: () => ({
     borderRadius: "4px",
     display: "flex",
-    border: "1px solid#1c1f2233;",
+    border: "1px solid rgba(0,0,0,.3)",
     outlineColor: "none",
     cursor: "pointer",
     height: 32,
