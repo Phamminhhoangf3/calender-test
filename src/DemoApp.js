@@ -1,24 +1,23 @@
 import React, { useRef, useState } from "react";
 import MainCalendar from "./components/mainCalendar";
+import MenuLeft, { optionsDropdown } from "./components/menu-left";
+import MenuRight from "./components/menu-right";
 
 import styles from "./demoApp.module.css";
-import { dateEnum } from "./enum";
-import MenuLeft from "./components/menu-left";
-import MenuRight from "./components/menu-right";
 
 export default function DemoApp() {
   const calendarRef = useRef(null);
-  const [valueDropdown, setValueDropdown] = useState(dateEnum.day);
+  const [optionDropdown, setOptionDropdown] = useState(optionsDropdown[0]);
 
   return (
     <div className={styles.demoApp}>
       <div className={styles.headerDemoApp}>
         <MenuLeft
           calendarRef={calendarRef}
-          value={valueDropdown}
-          setValue={setValueDropdown}
+          optionDropdown={optionDropdown}
+          setOptionDropdown={setOptionDropdown}
         />
-        <MenuRight calendarRef={calendarRef} mode={valueDropdown} />
+        <MenuRight calendarRef={calendarRef} mode={optionDropdown.value} />
       </div>
       <div className={styles.bodyDemoApp}>
         <MainCalendar calendarRef={calendarRef} />

@@ -1,6 +1,7 @@
 import { memo, useEffect } from "react";
 import styles from "./sidebar.module.css";
 import { Draggable } from "@fullcalendar/interaction/index.js";
+import { generateRandomColor } from "../../utils";
 
 const SideBar = ({ handleAddEvent, externalEvents, externalEventsRef }) => {
   useEffect(() => {
@@ -23,7 +24,9 @@ const SideBar = ({ handleAddEvent, externalEvents, externalEventsRef }) => {
 
   return (
     <>
-      <button onClick={handleAddEvent}>add event</button>
+      <button onClick={handleAddEvent} className={styles.btnAddEvent}>
+        add event
+      </button>
       <div className={styles.externalEvent} ref={externalEventsRef}>
         {externalEvents.map(({ title, id, color }) => (
           <div
@@ -35,7 +38,7 @@ const SideBar = ({ handleAddEvent, externalEvents, externalEventsRef }) => {
             data-color={color}
             style={{
               backgroundColor: color,
-              borderColor: color,
+              borderLeft: `4px solid ${generateRandomColor()}`,
             }}
           >
             {title}

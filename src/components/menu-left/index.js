@@ -1,7 +1,7 @@
 import { dateEnum } from "../../enum";
-import DropdownComponent from "../dropdown";
+import Select from "react-select";
 
-const optionDropdown = [
+export const optionsDropdown = [
   {
     label: "day",
     value: dateEnum.day,
@@ -16,19 +16,50 @@ const optionDropdown = [
   },
 ];
 
-export default function MenuLeft({ calendarRef, setValue, value }) {
-  function handleChangeDropdown(event) {
-    const selectedView = event.target.value;
-    setValue(selectedView);
+const stylesDropdown = {
+  control: () => ({
+    borderRadius: "4px",
+    display: "flex",
+    border: "1px solid#1c1f2233;",
+    outlineColor: "none",
+    cursor: "pointer",
+    height: 32,
+    minWidth: 110,
+  }),
+  option: (provided, state) => {
+    return {
+      ...provided,
+      backgroundColor:
+        state.isSelected || state.isFocused ? "#fff5d9" : "white",
+      color: "black",
+      ":hover": {
+        ...provided[":hover"],
+        backgroundColor: "#fff9e6",
+      },
+      ":active": null,
+    };
+  },
+};
+
+export default function MenuLeft({
+  calendarRef,
+  setOptionDropdown,
+  optionDropdown,
+}) {
+  function handleChangeDropdown(option) {
+    setOptionDropdown(option);
     const calendarApi = calendarRef.current.getApi();
-    calendarApi.changeView(selectedView);
+    calendarApi.changeView(option.value);
   }
 
   return (
-    <DropdownComponent
-      handleChange={handleChangeDropdown}
-      options={optionDropdown}
-      value={value}
+    <Select
+      options={optionsDropdown}
+      onChange={handleChangeDropdown}
+      value={optionDropdown}
+      components={{ IndicatorSeparator: null }}
+      styles={stylesDropdown}
+      isSearchable={false}
     />
   );
 }
